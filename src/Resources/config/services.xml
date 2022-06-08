@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<!--
+/*
+ * @author Ihor Ambrosov <ihor.ambrosov@gmail.com>
+ * @license https://opensource.org/licenses/OSL-3.0
+ */
+-->
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="Ambros\Warehouse\Core\Checkout\Cart\Order\CartConvertedEventSubscriber">
+            <tag name="kernel.event_subscriber"/>
+        </service>
+        <service id="Ambros\Warehouse\Core\Checkout\Order\OrderWarehouseExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+        <service id="Ambros\Warehouse\Core\Checkout\Order\SalesChannel\OrderRoute" decorates="Shopware\Core\Checkout\Order\SalesChannel\OrderRoute">
+            <argument type="service" id="Ambros\Warehouse\Core\Checkout\Order\SalesChannel\OrderRoute.inner"/>
+        </service>
+        <service id="Ambros\Warehouse\Core\Content\ImportExport\DataAbstractionLayer\Serializer\Entity\ProductSerializer" decorates="Shopware\Core\Content\ImportExport\DataAbstractionLayer\Serializer\Entity\ProductSerializer">
+            <argument type="service" id="Ambros\Warehouse\Core\Content\ImportExport\DataAbstractionLayer\Serializer\Entity\ProductSerializer.inner"/>
+            <tag name="shopware.import_export.entity_serializer" priority="-400"/>
+        </service>
+        <service id="Ambros\Warehouse\Core\Content\ImportExport\DataAbstractionLayer\Serializer\Field\ProductWarehousesSerializer">
+            <argument type="service" id="warehouse.repository"/>
+            <tag name="shopware.import_export.field_serializer" priority="-500"/>
+        </service>
+        <service id="Ambros\Warehouse\Core\Content\Product\Aggregate\ProductWarehouse\ProductWarehouseDefinition">
+            <tag name="shopware.entity.definition"/>
+        </service>
+        <service id="Ambros\Warehouse\Core\Content\Product\DataAbstractionLayer\FieldSerializer\ProductWarehousesAssociationFieldSerializer">
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\Write\WriteCommandExtractor"/>
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\Write\EntityWriteGatewayInterface"/>
+            <tag name="shopware.field_serializer"/>
+        </service>
+        <service id="Ambros\Warehouse\Core\Content\Product\DataAbstractionLayer\StockUpdater" decorates="Shopware\Core\Content\Product\DataAbstractionLayer\StockUpdater">
+            <argument type="service" id="Ambros\Warehouse\Core\Content\Product\DataAbstractionLayer\StockUpdater.inner"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+        <service id="Ambros\Warehouse\Core\Content\Product\DataAbstractionLayer\Subscriber\ProductSubscriber">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+        <service id="Ambros\Warehouse\Core\Content\Product\ProductWarehouseExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+        <service id="Ambros\Warehouse\Core\Content\Product\SalesChannel\SalesChannelProductSubscriber">
+            <argument type="service" id="product_warehouse.repository"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+        <service id="Ambros\Warehouse\Core\Content\Warehouse\Api\WarehouseController" public="true">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+        <service id="Ambros\Warehouse\Core\Content\Warehouse\DataAbstractionLayer\FieldSerializer\WarehouseCodeFieldSerializer">
+            <argument type="service" id="validator"/>
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\DefinitionInstanceRegistry"/>
+            <argument type="service" id="service_container"/>
+            <tag name="shopware.field_serializer"/>
+        </service>
+        <service id="Ambros\Warehouse\Core\Content\Warehouse\SalesChannel\WarehouseRoute" public="true">
+            <argument type="service" id="warehouse.repository"/>
+        </service>
+        <service id="Ambros\Warehouse\Core\Content\Warehouse\Subscriber\WarehouseSubscriber">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+        <service id="Ambros\Warehouse\Core\Content\Warehouse\WarehouseDefinition">
+            <tag name="shopware.entity.definition" entity="warehouse"/>
+            <tag name="shopware.composite_search.definition" priority="300"/>
+        </service>
+        <service id="Ambros\Warehouse\Core\Content\Warehouse\WarehouseTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="warehouse_translation"/>
+        </service>
+        <service id="Ambros\Warehouse\Core\Framework\Api\Converter\ApiConverter">
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\DefinitionInstanceRegistry"/>
+            <argument type="service" id="request_stack"/>
+            <tag name="shopware.api.converter"/>
+        </service>
+        <service id="Ambros\Warehouse\Core\Framework\Api\Route\ApiRouteLoader" decorates="Shopware\Core\Framework\Api\Route\ApiRouteLoader">
+            <argument type="service" id="Ambros\Warehouse\Core\Framework\Api\Route\ApiRouteLoader.inner"/>
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\DefinitionInstanceRegistry"/>
+            <tag name="routing.loader"/>
+        </service>
+        <service id="Ambros\Warehouse\Core\Framework\DataAbstractionLayer\Cache\EntityCacheKeyGenerator" decorates="Shopware\Core\Framework\DataAbstractionLayer\Cache\EntityCacheKeyGenerator">
+            <argument type="service" id="Ambros\Warehouse\Core\Framework\DataAbstractionLayer\Cache\EntityCacheKeyGenerator.inner"/>
+        </service>
+        <service id="Ambros\Warehouse\Core\Framework\DataAbstractionLayer\Dbal\CriteriaQueryBuilder" decorates="Shopware\Core\Framework\DataAbstractionLayer\Dbal\CriteriaQueryBuilder">
+            <argument type="service" id="Ambros\Warehouse\Core\Framework\DataAbstractionLayer\Dbal\CriteriaQueryBuilder.inner"/>
+        </service>
+        <service id="Ambros\Warehouse\Core\Framework\Validation\Constraint\NoSpecialCharValidator">
+            <tag name="validator.constraint_validator"/>
+        </service>
+        <service id="Ambros\Warehouse\Core\Framework\Validation\Constraint\NoWhitespaceValidator">
+            <tag name="validator.constraint_validator"/>
+        </service>
+        <service id="Ambros\Warehouse\Core\System\SalesChannel\Context\SalesChannelContextFactory" decorates="Shopware\Core\System\SalesChannel\Context\SalesChannelContextFactory">
+            <argument type="service" id="Ambros\Warehouse\Core\System\SalesChannel\Context\SalesChannelContextFactory.inner"/>
+            <argument type="service" id="warehouse.repository"/>
+        </service>
+        <service id="Ambros\Warehouse\Core\System\SalesChannel\Event\SalesChannelContextSwitchEventSubscriber">
+            <argument type="service" id="Shopware\Core\Framework\Validation\DataValidator"/>
+            <argument type="service" id="Shopware\Core\System\SalesChannel\Context\SalesChannelContextPersister"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+        <service id="Ambros\Warehouse\Storefront\Framework\Cache\CacheResponseSubscriber">
+            <argument>%shopware.http.cache.enabled%</argument>
+            <argument type="service" id="Shopware\Storefront\Framework\Routing\MaintenanceModeResolver"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+        <service id="Ambros\Warehouse\Storefront\Framework\Cache\Event\HttpCacheGenerateKeyEventSubscriber">
+            <tag name="kernel.event_subscriber"/>
+        </service>
+        <service id="Ambros\Warehouse\Storefront\Pagelet\Header\HeaderPageletLoadedEventSubscriber">
+            <argument type="service" id="Ambros\Warehouse\Core\Content\Warehouse\SalesChannel\WarehouseRoute"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+    </services>
+</container>

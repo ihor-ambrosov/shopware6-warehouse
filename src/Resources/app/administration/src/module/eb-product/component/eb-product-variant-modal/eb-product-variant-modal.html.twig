@@ -1,0 +1,47 @@
+{#
+/*
+ * @author Ihor Ambrosov <ihor.ambrosov@gmail.com>
+ * @license https://opensource.org/licenses/OSL-3.0
+ */
+#}
+{% block sw_product_variant_modal_body_grid_column_stock %}
+    <template #column-stock="{item, isInlineEdit}">
+        {% block sw_product_variant_modal_body_grid_column_stock_inline_edit %}
+            <template v-if="isInlineEdit && hasWarehouses(item)">
+                <template v-for="warehouse in getWarehouses(item)">
+                    <span class="eb-product-variant-modal__warehouse-field-label">
+                        {{ $tc('eb-product.list.warehouseFieldLabel', 0, { warehouse: warehouse.translated.name }) }}
+                    </span>
+                    <span class="eb-product-variant-modal__warehouse-field-value">
+                        <sw-number-field 
+                            :value="getProductWarehouseField(item, warehouse.id, 'stock')"
+                            @change="setProductWarehouseField(item, warehouse.id, 'stock', $event)"
+                            size="small"></sw-number-field>
+                    </span>
+                </template>
+            </template>
+        {% endblock %}
+
+        {% block sw_product_variant_modal_body_grid_column_stock_content %}
+            <template v-else>
+                <template v-for="warehouse in getWarehouses(item)">
+                    <span class="eb-product-variant-modal__warehouse-field-label">
+                        {{ $tc('eb-product.list.warehouseFieldLabel', 0, { warehouse: warehouse.translated.name }) }}
+                    </span>
+                    <span class="eb-product-variant-modal__warehouse-field-value">
+                        {{ getProductWarehouseField(item, warehouse.id, 'stock') }}
+                        <sw-color-badge :variant="getProductWarehouseField(item, warehouse.id, 'stock') | stockColorVariant"></sw-color-badge>
+                    </span>
+                </template>
+                <span class="eb-product-variant-modal__warehouse-field-label">
+                    {{ $tc('eb-product.list.warehouseTotalFieldLabel') }}
+                </span>
+                <span class="eb-product-variant-modal__warehouse-field-value">
+                    {{ item.stock }}
+                    <sw-color-badge :variant="item.stock | stockColorVariant"></sw-color-badge>
+                </span>
+            </template>
+        {% endblock %}
+        
+    </template>
+{% endblock %}

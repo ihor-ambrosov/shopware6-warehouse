@@ -1,0 +1,33 @@
+{
+  "eb-warehouse-select": {
+    "placeholder": "Alle Lagerhallen",
+    "searchPlaceholder": "Suchen ...",
+    "resetOption": "Alle Lagerhallen"
+  },
+  "eb-product": {
+    "deliverabilityForm": {
+      "labelWarehouse": "Lagerhalle"
+    },
+    "detailBase": {
+      "cardTitleWarehouse": "Lagerhallen"
+    },
+    "list": {
+      "warehouseFieldLabel": "{warehouse}:",
+      "warehouseTotalFieldLabel": "Gesamt:"
+    },
+    "variations": {
+      "warehouseFieldLabel": "{warehouse}:",
+      "warehouseTotalFieldLabel": "Gesamt:"
+    },
+    "filters": {
+      "warehousesFilter": {
+        "label": "Lagerhallen",
+        "placeholder": "Lagerhallen wählen ..."
+      }
+    },
+    "warehouse": {
+      "placeholderWarehouse": "Lagerhallen wählen ...",
+      "labelWarehouse": "Lagerhallen"
+    }
+  }
+}

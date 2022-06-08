@@ -1,0 +1,14 @@
+{#
+/*
+ * @author Ihor Ambrosov <ihor.ambrosov@gmail.com>
+ * @license https://opensource.org/licenses/OSL-3.0
+ */
+#}
+{% block sw_order_line_items_grid_sales_channel_grid_columns_label_inline_edit %}
+<sw-order-product-select v-if="isInlineEdit"
+    :item="item"
+    :taxStatus="taxStatus"
+    :salesChannelId="salesChannelId"
+    :warehouseId="warehouseId">
+</sw-order-product-select>
+{% endblock %}

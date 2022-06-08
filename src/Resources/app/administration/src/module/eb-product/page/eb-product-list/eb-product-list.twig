@@ -1,0 +1,102 @@
+{#
+/*
+ * @author Ihor Ambrosov <ihor.ambrosov@gmail.com>
+ * @license https://opensource.org/licenses/OSL-3.0
+ */
+#}
+{% block sw_product_list_grid_columns_stock %}
+<template #column-stock="{ item, isInlineEdit, compact }">
+    {% block sw_product_list_grid_columns_stock_inline_edit %}
+    <template v-if="isInlineEdit && hasWarehouses(item)">
+        <template v-for="warehouse in getWarehouses(item)">
+            <span class="eb-product-list-grid__warehouse-field-label">
+                {{ $tc('eb-product.list.warehouseFieldLabel', 0, { warehouse: warehouse.translated.name }) }}
+            </span>
+            <span class="eb-product-list-grid__warehouse-field-value">
+                <sw-number-field 
+                    :value="getProductWarehouseField(item, warehouse.id, 'stock')"
+                    @change="setProductWarehouseField(item, warehouse.id, 'stock', $event)"
+                    :size="compact ? 'small' : 'default'">
+                </sw-number-field>
+            </span>
+        </template>
+    </template>
+    {% endblock %}
+    {% block sw_product_list_grid_columns_stock_content %}
+    <template v-else>
+        <template v-for="warehouse in getWarehouses(item)">
+            <span class="eb-product-list-grid__warehouse-field-label">
+                {{ $tc('eb-product.list.warehouseFieldLabel', 0, { warehouse: warehouse.translated.name }) }}
+            </span>
+            <span class="eb-product-list-grid__warehouse-field-value">
+                {{ getProductWarehouseField(item, warehouse.id, 'stock') }}
+                <sw-color-badge :variant="getProductWarehouseField(item, warehouse.id, 'stock') | stockColorVariant"></sw-color-badge>
+            </span>
+        </template>
+        <span class="eb-product-list-grid__warehouse-field-label">
+            {{ $tc('eb-product.list.warehouseTotalFieldLabel') }}
+        </span>
+        <span class="eb-product-list-grid__warehouse-field-value">
+            {{ item.stock }}
+            <sw-color-badge :variant="item.stock | stockColorVariant"></sw-color-badge>
+        </span>
+    </template>
+    {% endblock %}
+</template>
+{% block eb_product_list_grid_columns_available_stock %}  
+<template #column-availableStock="{ item }">
+    <template v-for="warehouse in getWarehouses(item)">
+        <span class="eb-product-list-grid__warehouse-field-label">
+            {{ $tc('eb-product.list.warehouseFieldLabel', 0, { warehouse: warehouse.translated.name }) }}
+        </span>
+        <span class="eb-product-list-grid__warehouse-field-value">
+            {{ getProductWarehouseField(item, warehouse.id, 'availableStock') }}
+        </span>
+    </template>
+    <span class="eb-product-list-grid__warehouse-field-label">
+        {{ $tc('eb-product.list.warehouseTotalFieldLabel') }}
+    </span>
+    <span class="eb-product-list-grid__warehouse-field-value">
+        {{ item.availableStock }}
+    </span>
+</template>
+{% endblock %}
+{% endblock %}
+{% block sw_product_list_bulk_edit_grid_columns_stock %}
+<template v-if="isVersionGreaterOrEqual('6.4.4.0')" #column-stock="{ item }">
+    <template v-for="warehouse in getWarehouses(item)">
+        <span class="eb-product-list-grid__warehouse-field-label">
+            {{ $tc('eb-product.list.warehouseFieldLabel', 0, { warehouse: warehouse.translated.name }) }}
+        </span>
+        <span class="eb-product-list-grid__warehouse-field-value">
+            {{ getProductWarehouseField(item, warehouse.id, 'stock') }}
+            <sw-color-badge :variant="getProductWarehouseField(item, warehouse.id, 'stock') | stockColorVariant"></sw-color-badge>
+        </span>
+    </template>
+    <span class="eb-product-list-grid__warehouse-field-label">
+        {{ $tc('eb-product.list.warehouseTotalFieldLabel') }}
+    </span>
+    <span class="eb-product-list-grid__warehouse-field-value">
+        {{ item.stock }}
+        <sw-color-badge :variant="item.stock | stockColorVariant"></sw-color-badge>
+    </span>
+</template>
+{% block eb_product_list_bulk_edit_grid_columns_available_stock %}
+<template v-if="isVersionGreaterOrEqual('6.4.4.0')" #column-availableStock="{ item }">
+    <template v-for="warehouse in getWarehouses(item)">
+        <span class="eb-product-list-grid__warehouse-field-label">
+            {{ $tc('eb-product.list.warehouseFieldLabel', 0, { warehouse: warehouse.translated.name }) }}
+        </span>
+        <span class="eb-product-list-grid__warehouse-field-value">
+            {{ getProductWarehouseField(item, warehouse.id, 'availableStock') }}
+        </span>
+    </template>
+    <span class="eb-product-list-grid__warehouse-field-label">
+        {{ $tc('eb-product.list.warehouseTotalFieldLabel') }}
+    </span>
+    <span class="eb-product-list-grid__warehouse-field-value">
+        {{ item.availableStock }}
+    </span>
+</template>
+{% endblock %}
+{% endblock %}

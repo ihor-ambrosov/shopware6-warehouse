@@ -1,0 +1,20 @@
+{#
+/*
+ * @author Ihor Ambrosov <ihor.ambrosov@gmail.com>
+ * @license https://opensource.org/licenses/OSL-3.0
+ */
+#}
+{% sw_extends '@Storefront/storefront/page/account/order-history/order-detail.html.twig' %}
+{% block page_account_order_item_detail_number %}
+{{ parent() }}
+{% block page_account_order_item_detail_warehouse %}
+    {% if order.extensions.warehouse %}
+    {% block page_account_order_item_detail_warehouse_label %}
+        <dt class="col-6 col-md-5">{{ "account.orderItemWarehouse"|trans|sw_sanitize }}</dt>
+    {% endblock %}
+    {% block page_account_order_item_detail_warehouse_value %}
+        <dd class="col-6 col-md-7 order-item-detail-labels-value">{{ order.extensions.warehouse.translated.name }}</dd>
+    {% endblock %}
+    {% endif %}
+{% endblock %}
+{% endblock %}

@@ -1,0 +1,43 @@
+{
+    "name": "ambros/warehouse",
+    "description": "Multi-Warehouse",
+    "version": "1.0.0",
+    "type": "shopware-platform-plugin",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Ihor Ambrosov",
+            "email": "ihor.ambrosov@gmail.com"
+        }
+    ],
+    "require": {
+        "shopware/core": "~6.4",
+        "shopware/administration": "~6.4"
+    },
+    "extra": {
+        "shopware-plugin-class": "Ambros\\Warehouse\\AmbrosWarehouse",
+        "copyright": "(c) e-ComBricks",
+        "label": {
+            "de-DE": "Multi-Lagerhaus",
+            "en-GB": "Multi-Warehouse"
+        },
+        "description": {
+            "de-DE": "Richten Sie mehrere Versandorte ein, kontrollieren Sie den Bestand an verschiedenen physischen Standorten über dieselbe Verwaltungsoberfläche sowie viele andere Funktionen.",
+            "en-GB": "Set up multiple shipping origins, control stock in different physical locations through the same admin interface as well as many other functions for a shop."
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Ambros\\Warehouse\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ambros\\Warehouse\\Test\\": "tests/"
+        }
+    },
+    "conflict": {
+        "shopware/storefront": "<6,>=7",
+        "shopware/administration": "<6,>=7"
+    }
+}

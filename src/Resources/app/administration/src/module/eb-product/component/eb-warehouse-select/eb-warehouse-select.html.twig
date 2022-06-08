@@ -1,0 +1,25 @@
+{#
+/*
+ * @author Ihor Ambrosov <ihor.ambrosov@gmail.com>
+ * @license https://opensource.org/licenses/OSL-3.0
+ */
+#}
+{% block eb_warehouse_switch_select %}
+    <div class="eb-warehouse-select">
+        <sw-entity-single-select
+                ref="warehouseSelect"
+                :disabled="disabled"
+                :placeholder="$tc('eb-warehouse-select.placeholder')"
+                :label="label"
+                :searchPlaceholder="$tc('eb-warehouse-select.searchPlaceholder')"
+                :resetOption="$tc('eb-warehouse-select.resetOption')"
+                @change="onChange"
+                :value="warehouseId"
+                entity="warehouse"
+                :criteria="warehouseCriteria">
+            <template #labelProperty="{item, labelProperty}">
+                <span v-if="item.translated">{{ item.translated[labelProperty] }}</span>
+            </template>
+        </sw-entity-single-select>
+    </div>
+{% endblock %}

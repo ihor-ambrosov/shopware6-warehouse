@@ -1,0 +1,8 @@
+{
+  "account": {
+    "orderItemWarehouse": "Warehouse:"
+  },
+  "checkout": {
+    "finishInfoWarehouse": "Warehouse:"
+  }
+}

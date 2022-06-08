@@ -1,0 +1,43 @@
+{#
+/*
+ * @author Ihor Ambrosov <ihor.ambrosov@gmail.com>
+ * @license https://opensource.org/licenses/OSL-3.0
+ */
+#}
+{% block sw_product_variants_overview_data_grid_column_stock %}
+    <template slot="column-stock" slot-scope="{ item, isInlineEdit, compact }">
+        {% block sw_product_variants_overview_data_grid_column_stock_inline_edit_field %}
+            <template v-if="isInlineEdit && hasWarehouses(item)">
+                <template v-for="warehouse in getWarehouses(item)">
+                    <span class="eb-product-variants-overview__data-grid__warehouse-field-label">
+                        {{ $tc('eb-product.variations.warehouseFieldLabel', 0, { warehouse: warehouse.translated.name }) }}
+                    </span>
+                    <span class="eb-product-variants-overview__data-grid__warehouse-field-value">
+                        <sw-number-field 
+                            :value="getProductWarehouseField(item, warehouse.id, 'stock')"
+                            @change="setProductWarehouseField(item, warehouse.id, 'stock', $event)"
+                            :size="compact ? 'small' : 'default'"></sw-number-field>
+                    </span>
+                </template>
+            </template>
+        {% endblock %}
+        {% block sw_product_variants_overview_data_grid_column_stock_preview %}
+            <template v-else>
+                <template v-for="warehouse in getWarehouses(item)">
+                    <span class="eb-product-variants-overview__data-grid__warehouse-field-label">
+                        {{ $tc('eb-product.variations.warehouseFieldLabel', 0, { warehouse: warehouse.translated.name }) }}
+                    </span>
+                    <span class="eb-product-variants-overview__data-grid__warehouse-field-value">
+                        {{ getProductWarehouseField(item, warehouse.id, 'stock') }}
+                    </span>
+                </template>
+                <span class="eb-product-variants-overview__data-grid__warehouse-field-label">
+                    {{ $tc('eb-product.variations.warehouseTotalFieldLabel') }}
+                </span>
+                <span class="eb-product-variants-overview__data-grid__warehouse-field-value">
+                    {{ item.stock }}
+                </span>
+            </template>
+        {% endblock %}
+    </template>
+{% endblock %}

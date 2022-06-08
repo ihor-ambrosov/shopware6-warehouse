@@ -1,0 +1,33 @@
+{
+  "eb-warehouse-select": {
+    "placeholder": "All Warehouses",
+    "searchPlaceholder": "Search for ...",
+    "resetOption": "All Warehouses"
+  },
+  "eb-product": {
+    "deliverabilityForm": {
+      "labelWarehouse": "Warehouse"
+    },
+    "detailBase": {
+      "cardTitleWarehouse": "Warehouses"
+    },
+    "list": {
+      "warehouseFieldLabel": "{warehouse}:",
+      "warehouseTotalFieldLabel": "Total:"
+    },
+    "variations": {
+      "warehouseFieldLabel": "{warehouse}:",
+      "warehouseTotalFieldLabel": "Total:"
+    },
+    "filters": {
+      "warehousesFilter": {
+        "label": "Warehouses",
+        "placeholder": "Select warehouses ..."
+      }
+    },
+    "warehouse": {
+      "placeholderWarehouse": "Select warehouses ...",
+      "labelWarehouse": "Warehouses"
+    }
+  }
+}

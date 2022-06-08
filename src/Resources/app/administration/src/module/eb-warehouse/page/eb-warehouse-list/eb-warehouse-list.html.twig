@@ -1,0 +1,166 @@
+{#
+/*
+ * @author Ihor Ambrosov <ihor.ambrosov@gmail.com>
+ * @license https://opensource.org/licenses/OSL-3.0
+ */
+#}
+{% block eb_warehouse_list %}
+    <sw-page class="eb-warehouse-list">
+        {% block eb_warehouse_list_search_bar %}
+        <template #search-bar>
+            <sw-search-bar
+                initial-search-type="warehouse"
+                :initial-search="term"
+                @search="onSearch"
+                :placeholder="$tc('eb-warehouse.general.placeholderSearchBar')"
+            />
+        </template>
+        {% endblock %}
+        
+        {% block eb_warehouse_list_smart_bar_header %}
+        <template #smart-bar-header>
+            {% block eb_warehouse_list_smart_bar_header_title %}
+                <h2>
+                    {% block eb_warehouse_list_smart_bar_header_title_text %}
+                    {{ $tc('eb-warehouse.list.textWarehouseOverview') }}
+                    {% endblock %}
+                    {% block eb_warehouse_list_smart_bar_header_amount %}
+                    <span v-if="!isLoading" class="sw-page__smart-bar-amount">
+                        ({{ total }})
+                    </span>
+                    {% endblock %}
+                </h2>
+            {% endblock %}
+        </template>
+        {% endblock %}
+
+        {% block eb_warehouse_list_actions %}
+        <template #smart-bar-actions>
+            {% block eb_warehouse_list_smart_bar_actions %}
+            <sw-button
+                v-tooltip.bottom="{
+                    message: $tc('sw-privileges.tooltip.warning'),
+                    disabled: allowCreate,
+                    showOnDisabledElements: true
+                }"
+                :router-link="{ name: 'eb.warehouse.create' }"
+                :disabled="!allowCreate"
+                class="eb-warehouse-list__add-warehouse"
+                variant="primary"
+                >
+                {{ $tc('eb-warehouse.list.buttonAddWarehouse') }}
+            </sw-button>
+            {% endblock %}
+        </template> 
+        {% endblock %}
+
+        {% block eb_warehouse_list_language_switch %}
+        <template #language-switch>
+            <sw-language-switch @on-change="onChangeLanguage"></sw-language-switch>
+        </template>
+        {% endblock %}
+
+        <template #content>
+            {% block eb_warehouse_list_content %}
+            <div class="eb-warehouse-list__content">
+                
+                {% block eb_warehouse_list_grid %}
+                <sw-entity-listing
+                    class="eb-warehouse-list__grid"
+                    detailRoute="eb.warehouse.detail"
+                    :isLoading="isLoading"
+                    :columns="warehouseColumns"
+                    :repository="warehouseRepository"
+                    :items="warehouses"
+                    :criteriaLimit="limit"
+                    @update-records="updateTotal"
+                    @page-change="onPageChange"
+                    @inline-edit-save="onInlineEditSave"
+                    :sortBy="sortBy"
+                    :sortDirection="sortDirection"
+                    @column-sort="onSortColumn"
+                    :disableDataFetching=true
+                    :allowView="allowView"
+                    :allowEdit="allowEdit"
+                    :allowInlineEdit="allowInlineEdit"
+                    :allowDelete="allowDelete">
+                    {% block eb_warehouse_list_grid_columns_code %}
+                    <template #column-code="{ item, isInlineEdit, compact }">
+                        <sw-text-field 
+                            v-if="isInlineEdit && !isDefault(item.id)" 
+                            v-model="item.code"
+                            :size="compact ? 'small' : 'default'">
+                        </sw-text-field>
+                        <div v-else>
+                            <router-link :to="{ name: 'eb.warehouse.detail', params: { id: item.id } }">{{ item.code }}</router-link>
+                        </div>
+                    </template>
+                    {% endblock %}
+                    {% block eb_warehouse_list_grid_columns_actions %}
+                        {% block eb_warehouse_list_grid_columns_actions_delete %}
+                        <template #delete-action="{ item, showDelete }">
+                            <sw-context-menu-item
+                                v-tooltip.bottom="tooltipDelete(item.id)"
+                                class="eb-warehouse-list__delete-action"
+                                variant="danger"
+                                :disabled="isDefault(item.id) || !allowDelete"
+                                @click="showDelete(item.id)">
+                                {{ $tc('global.default.delete') }}
+                            </sw-context-menu-item>
+                        </template>
+                        {% endblock %}
+                        {% block eb_warehouse_list_grid_columns_actions_delete_confirm %}
+                        <template #delete-confirm-text="{ item }">
+                            {{ $tc('eb-warehouse.list.textDeleteConfirm', 1, { name: item.name } ) }}
+                        </template>
+                        {% endblock %}
+                    {% endblock %}
+                </sw-entity-listing>
+                {% endblock %}
+
+                {% block eb_warehouse_list_empty_state %}
+                <template v-if="isVersionGreaterOrEqual('6.4.2.0') && !isVersionGreaterOrEqual('6.4.8.0')">
+                    <sw-empty-state
+                        v-if="feature.isActive('FEATURE_NEXT_6040') && !isLoading && !total && isValidTerm(term)"
+                        :title="$tc('sw-empty-state.messageNoResultTitle')"
+                    >
+                        <template #default>
+                            {{ $tc('sw-empty-state.messageNoResultSublineBefore') }}
+                            <router-link
+                                class="sw-empty-state__description-link"
+                                :to="{ name: 'sw.profile.index.searchPreferences' }"
+                            >
+                                {{ $tc('sw-empty-state.messageNoResultSublineLink') }}
+                            </router-link>
+                            {{ $tc('sw-empty-state.messageNoResultSublineAfter') }}
+                        </template>
+                    </sw-empty-state>
+                </template>
+                <template v-else-if="isVersionGreaterOrEqual('6.4.8.0')">
+                    <sw-empty-state
+                        v-if="!isLoading && !total && isValidTerm(term)"
+                        :title="$tc('sw-empty-state.messageNoResultTitle')"
+                    >
+                        <template #default>
+                            {{ $tc('sw-empty-state.messageNoResultSublineBefore') }}
+                            <router-link
+                                class="sw-empty-state__description-link"
+                                :to="{ name: 'sw.profile.index.searchPreferences' }"
+                            >
+                                {{ $tc('sw-empty-state.messageNoResultSublineLink') }}
+                            </router-link>
+                            {{ $tc('sw-empty-state.messageNoResultSublineAfter') }}
+                        </template>
+                    </sw-empty-state>
+                </template>
+                {% endblock %}
+                
+                {% block eb_warehouse_list_grid_loader %}
+                    <sw-loader v-if="!isVersionGreaterOrEqual('6.4.9.0') && isLoading"></sw-loader>
+                {% endblock %}
+                
+            </div>
+            {% endblock %}
+        </template>
+    </sw-page>
+{% endblock %}

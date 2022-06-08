@@ -1,0 +1,22 @@
+{
+  "eb-order": {
+    "createBase": {
+      "detailsFooter": {
+        "labelWarehouse": "Lagerhalle",
+        "placeholderWarehouse": "Lagerhalle wählen ..."
+      }
+    },
+    "detailBase": {
+      "labelWarehouse": "Lagerhalle"
+    },
+    "list": {
+      "columnWarehouse": "Lagerhalle"
+    },
+    "filters": {
+      "warehouseFilter": {
+        "label": "Lagerhallen",
+        "placeholder": "Lagerhallen wählen ..."
+      }
+    }
+  }
+}

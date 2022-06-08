@@ -1,0 +1,20 @@
+{#
+/*
+ * @author Ihor Ambrosov <ihor.ambrosov@gmail.com>
+ * @license https://opensource.org/licenses/OSL-3.0
+ */
+#}
+{% block eb_product_warehouse_form %}
+    <div class="eb-product-warehouse-form">
+        {% block eb_product_warehouse_form_warehouse_field %}
+            <eb-product-warehouse-select
+                v-model="product.extensions.productWarehouses"
+                class="eb-product-warehouse-form__warehouse_field"
+                ref="productWarehouse"
+                :label="$tc('eb-product.warehouse.labelWarehouse')"
+                :placeholder="$tc('eb-product.warehouse.placeholderWarehouse')"
+                :disabled="!allowEdit"
+            />
+        {% endblock %}
+    </div>
+{% endblock %}

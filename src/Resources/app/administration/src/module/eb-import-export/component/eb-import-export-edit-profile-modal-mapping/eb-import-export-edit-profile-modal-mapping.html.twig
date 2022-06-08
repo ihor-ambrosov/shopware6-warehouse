@@ -1,0 +1,29 @@
+{#
+/*
+ * @author Ihor Ambrosov <ihor.ambrosov@gmail.com>
+ * @license https://opensource.org/licenses/OSL-3.0
+ */
+#}
+{% block sw_import_export_edit_profile_modal_mapping_grid_entry_column %}
+    <template #column-entry="{ item }" v-if="isVersionGreaterOrEqual('6.4.8.0')">
+        <sw-import-export-entity-path-select
+            v-model="item.key"
+            :languages="languages"
+            :currencies="currencies"
+            :warehouses="warehouses"
+            :entity-type="profile.sourceEntity"
+            :disabled="profile.systemDefault"
+            :custom-field-sets="customFieldSets"
+        />
+    </template>
+    <template #column-entry="{ item }" v-else>
+        <sw-import-export-entity-path-select
+            v-model="item.key"
+            :languages="languages"
+            :currencies="currencies"
+            :warehouses="warehouses"
+            :entity-type="profile.sourceEntity"
+            :disabled="profile.systemDefault"
+        />
+    </template>
+{% endblock %}

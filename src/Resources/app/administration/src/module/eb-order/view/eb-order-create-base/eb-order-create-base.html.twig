@@ -1,0 +1,20 @@
+{#
+/*
+ * @author Ihor Ambrosov <ihor.ambrosov@gmail.com>
+ * @license https://opensource.org/licenses/OSL-3.0
+ */
+#}
+{% block sw_order_create_base_line_items_grid %}
+    <sw-order-line-items-grid-sales-channel
+        :cart="cart"
+        :currency="currency"
+        :salesChannelId="salesChannelId"
+        :warehouseId="warehouseId"
+        :isLoading="isLoading"
+        :isCustomerActive="isCustomerActive"
+        editable
+        ref="sw-order-line-item-grid-sales-channel"
+        @on-save-item="onSaveItem"
+        @on-remove-items="onRemoveItems">
+    </sw-order-line-items-grid-sales-channel>
+{% endblock %}

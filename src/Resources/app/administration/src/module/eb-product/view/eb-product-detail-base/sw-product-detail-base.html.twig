@@ -1,0 +1,25 @@
+{#
+/*
+ * @author Ihor Ambrosov <ihor.ambrosov@gmail.com>
+ * @license https://opensource.org/licenses/OSL-3.0
+ */
+#}
+{% block sw_product_detail_deliverability_info_card %}
+    
+    {% block eb_product_detail_base_warehouse_card %}
+    <sw-card
+        v-show="showProductCard('warehouse')"
+        :title="$tc('eb-product.detailBase.cardTitleWarehouse')"
+        :isLoading="isLoading">
+        {% block eb_product_detail_base_warehouse_form %}
+            <eb-product-warehouse-form
+                v-if="!isLoading"
+                :allowEdit="acl.can('product.editor')">
+            </eb-product-warehouse-form>
+        {% endblock %}
+    </sw-card>
+    {% endblock %}
+    
+    {% parent() %}
+    
+{% endblock %}

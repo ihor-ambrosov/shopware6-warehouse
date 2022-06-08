@@ -1,0 +1,8 @@
+{
+    "name": "ambroswarehouse",
+    "version": "1.0.0",
+    "description": "Multi-Warehouse",
+    "main": "index.js",
+    "author": "Ihor Ambrosov <ihor.ambrosov@gmail.com>",
+    "license": "MIT"
+}

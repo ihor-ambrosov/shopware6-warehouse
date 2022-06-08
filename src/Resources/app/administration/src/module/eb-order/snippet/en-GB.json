@@ -1,0 +1,22 @@
+{
+  "eb-order": {
+    "createBase": {
+      "detailsFooter": {
+        "labelWarehouse": "Warehouse",
+        "placeholderWarehouse": "Select warehouse ..."
+      }
+    },
+    "detailBase": {
+      "labelWarehouse": "Warehouse"
+    },
+    "list": {
+      "columnWarehouse": "Warehouse"
+    },
+    "filters": {
+      "warehouseFilter": {
+        "label": "Warehouses",
+        "placeholder": "Select warehouses ..."
+      }
+    }
+  }
+}

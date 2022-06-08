@@ -1,0 +1,52 @@
+{
+  "eb-shortcut-overview": {
+    "functionAddWarehouse": "Add warehouse",
+    "keyboardShortcutAddWarehouse": "A W",
+    "functionGoToWarehouses": "Go to warehouses",
+    "keyboardShortcutGoToWarehouses": "G W"
+  },
+  "eb-warehouse": {
+    "general": {
+      "mainMenuItemList": "Warehouses",
+      "mainMenuItemGeneral": "Warehouses",
+      "placeholderSearchBar": "Search warehouses ..."
+    },
+    "list": {
+      "textDeleteConfirm": "Are you sure you want to delete the warehouse \"{name}\"? This will delete all content in this warehouse and can not be undone!",
+      "textWarehouseOverview": "Warehouses",
+      "textTotalWarehouse": "No warehouses | One warehouse | {count} warehouses",
+      "buttonAddWarehouse": "Add warehouse",
+      "columnCode": "Code",
+      "columnName": "Name",
+      "columnPriority": "Priority",
+      "messageSaveError": "Warehouse could not be saved.",
+      "messageSaveSuccess": "Warehouse \"{name}\" has been saved."
+    },
+    "detail": {
+      "textHeadline": "New warehouse",
+      "buttonCancel": "Cancel",
+      "buttonSave": "Save",
+      "cardTitleWarehouseInfo": "Warehouse information",
+      "labelCode": "Code",
+      "labelName": "Name",
+      "labelPriority": "Priority",
+      "placeholderCode": "Enter code...",
+      "placeholderName": "Enter name...",
+      "placeholderPriority": "Enter priority...",
+      "messageSaveError": "Warehouse could not be saved.",
+      "messageSaveSuccess": "Warehouse \"{name}\" has been saved."
+    }
+  },
+  "global": {
+    "entities": {
+      "warehouse": "Warehouse | Warehouses"
+    }
+  },
+  "sw-privileges": {
+    "permissions": {
+      "warehouse": {
+        "label": "Warehouses"
+      }
+    }
+  }
+}

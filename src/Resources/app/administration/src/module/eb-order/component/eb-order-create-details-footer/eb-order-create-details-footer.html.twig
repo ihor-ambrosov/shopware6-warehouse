@@ -1,0 +1,24 @@
+{#
+/*
+ * @author Ihor Ambrosov <ihor.ambrosov@gmail.com>
+ * @license https://opensource.org/licenses/OSL-3.0
+ */
+#}
+{% block sw_order_create_details_footer_order_language %}
+    
+    {% block eb_order_create_details_footer_warehouse %}
+        <sw-entity-single-select
+            size="small"
+            entity="warehouse"
+            v-model="context.warehouseId"
+            class="sw-order-create-details-footer__item"
+            :disabled="!isCustomerActive"
+            :criteria="warehouseCriteria"
+            :label="$tc('eb-order.createBase.detailsFooter.labelWarehouse')"
+            :placeholder="$tc('eb-order.createBase.detailsFooter.placeholderWarehouse')">
+        </sw-entity-single-select>
+    {% endblock %}
+    
+    {% parent %}
+    
+{% endblock %}

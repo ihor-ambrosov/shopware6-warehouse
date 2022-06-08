@@ -1,0 +1,11 @@
+{#
+/*
+ * @author Ihor Ambrosov <ihor.ambrosov@gmail.com>
+ * @license https://opensource.org/licenses/OSL-3.0
+ */
+#}
+{% sw_extends '@Storefront/storefront/layout/header/actions/currency-widget.html.twig' %}
+{% block layout_header_actions_currency_widget %}
+    {{ parent() }}
+    {% sw_include 'storefront/layout/header/actions/warehouse-widget.html.twig' %}
+{% endblock %}

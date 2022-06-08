@@ -1,0 +1,52 @@
+{
+  "eb-shortcut-overview": {
+    "functionAddWarehouse": "Lagerhalle anlegen",
+    "keyboardShortcutAddWarehouse": "A W",
+    "functionGoToWarehouses": "Gehe zu Lagerhallen",
+    "keyboardShortcutGoToWarehouses": "G W"
+  },
+  "eb-warehouse": {
+    "general": {
+      "mainMenuItemList": "Lagerhallen",
+      "mainMenuItemGeneral": "Lagerhallen",
+      "placeholderSearchBar": "Durchsuche alle Lagerhallen ..."
+    },
+    "list": {
+      "textDeleteConfirm": "Bist Du sicher, dass Du die Lagerhallen \"{name}\" löschen möchtest? Dies löscht alle Inhalte in dieser Lagerhallen unwiederbringlich!",
+      "textWarehouseOverview": "Lagerhallen",
+      "textTotalWarehouse": "Keine Lagerhallen | Ein Lagerhallen | {count} Lagerhallen",
+      "buttonAddWarehouse": "Lagerhalle anlegen",
+      "columnCode": "Code",
+      "columnName": "Name",
+      "columnPriority": "Priorität",
+      "messageSaveError": "Der Lagerhalle konnte nicht gespeichert werden.",
+      "messageSaveSuccess": "Der Lagerhalle \"{name}\" wurde erfolgreich gespeichert."
+    },
+    "detail": {
+      "textHeadline": "Neuer Lagerhalle",
+      "buttonCancel": "Abbrechen",
+      "buttonSave": "Speichern",
+      "cardTitleWarehouseInfo": "Lagerhalle Informationen",
+      "labelCode": "Code",
+      "labelName": "Name",
+      "labelPriority": "Priorität",
+      "placeholderCode": "Gib einen Code ein ...",
+      "placeholderName": "Gib einen Name ein ...",
+      "placeholderPriority": "Gib einen Priorität ein ...",
+      "messageSaveError": "Der Lagerhalle konnte nicht gespeichert werden.",
+      "messageSaveSuccess": "Der Lagerhalle \"{name}\" wurde erfolgreich gespeichert."
+    }
+  },
+  "global": {
+    "entities": {
+      "warehouse": "Lagerhalle | Lagerhallen"
+    }
+  },
+  "sw-privileges": {
+    "permissions": {
+      "warehouse": {
+        "label": "Lagerhallen"
+      }
+    }
+  }
+}

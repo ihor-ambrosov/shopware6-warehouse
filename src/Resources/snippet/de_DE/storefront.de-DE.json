@@ -1,0 +1,8 @@
+{
+  "account": {
+    "orderItemWarehouse": "Lagerhalle:"
+  },
+  "checkout": {
+    "finishInfoWarehouse": "Lagerhalle:"
+  }
+}

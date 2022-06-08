@@ -1,0 +1,20 @@
+{#
+/*
+ * @author Ihor Ambrosov <ihor.ambrosov@gmail.com>
+ * @license https://opensource.org/licenses/OSL-3.0
+ */
+#}
+{% sw_extends '@Storefront/storefront/page/checkout/finish/finish-details.html.twig' %}
+{% block page_checkout_finish_order_payment_method %}
+
+{% block page_checkout_finish_order_warehouse %}
+{% if page.order.extensions.warehouse %}
+<p>
+    <strong>{{ "checkout.finishInfoWarehouse"|trans|sw_sanitize }}</strong>
+    {{ page.order.extensions.warehouse.translated.name }}
+</p>
+{% endif %}
+{% endblock %}
+
+{{ parent() }}
+{% endblock %}
