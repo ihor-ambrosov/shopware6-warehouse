@@ -1,0 +1,1 @@
+# shopware6-warehouse
